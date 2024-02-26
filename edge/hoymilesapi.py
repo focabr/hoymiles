@@ -547,3 +547,41 @@ class Hoymiles(object):
             if "status" in retv.keys():
                 return int(retv["status"]), retv["data"]
         return "-1", {}
+
+    def send_payload_api(self, api: str, header: dict, payload: str) -> dict:
+        """Send api payload
+
+        Args:
+            api (str): part of api adress
+            header (dict): message header
+            payload (str): payload
+
+        Returns:
+            dict: _description_
+        """
+        # retv = self.pega_url_json_dic(BASE_URL + api, header, payload)
+        retv, s_code = self.send_request(
+            "https://neapi.hoymiles.com/" + api, header, payload, "POST"
+        )
+        if s_code == 200:
+            try:
+                retv = json.loads(retv)
+                if "status" in retv.keys():
+                    if retv["status"] != "0":
+                        self.logger.debug(
+                            f"{api} Error: {retv['status']} {retv['message']}"
+                        )
+                        if retv["status"] == "100":
+                            # request new token
+                            if self.get_token():
+                                # chama pega solar novamente
+                                retv["status"], retv["data"] = self.request_solar_data()
+                        elif retv["status"] == "3":
+                            self.logger.error("Wrong plant id!!")
+                            sys.exit(0)
+                else:
+                    self.logger.error("I can't connect!")
+            except Exception as err:
+                self.logger.error(f"There was an error in retv {retv}")
+                return {}
+        return retv
