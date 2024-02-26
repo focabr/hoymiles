@@ -541,7 +541,7 @@ class Hoymiles(object):
             + f"Expires=Sat, 30 Mar {date.today().year + 1} 22:11:48 GMT;"
             + "'"
         )
-        retv = self.send_payload(DOWN_MODULE_DAY_DATA, header, payload)
+        retv = self.send_payload_api(DOWN_MODULE_DAY_DATA, header, payload)
 
         if type(retv) is dict:
             if "status" in retv.keys():
