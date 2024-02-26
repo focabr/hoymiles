@@ -29,9 +29,11 @@ from const import (
     PAYLOAD_ID,
     PAYLOAD_T1,
     PAYLOAD_T2,
+    PAYLOAD_SID,
     STATION_FIND,
     PAYLOAD_DETAILS,
     DATA_FIND_DETAILS,
+    DOWN_MODULE_DAY_DATA,
 )
 
 module_logger = logging.getLogger("HoymilesAdd-on.hoymilesapi")
@@ -523,3 +525,25 @@ class Hoymiles(object):
         except Exception as err:
             self.logger.warning(f"There was a problem while opening error list {err}")
         return ""
+
+    def down_module_day_data(self):
+        """_down_summary_data_"""
+        template = Template(PAYLOAD_SID)
+        payload = template.substitute(
+            sid=self.plant_id, date=datetime.now().strftime("%Y-%m-%d")
+        )
+        header = HEADER_DATA
+        header["Cookie"] = (
+            COOKIE_UID
+            + "; hm_token="
+            + self.connection.token
+            + "; Path=/; Domain=.global.hoymiles.com;"
+            + f"Expires=Sat, 30 Mar {date.today().year + 1} 22:11:48 GMT;"
+            + "'"
+        )
+        retv = self.send_payload(DOWN_MODULE_DAY_DATA, header, payload)
+
+        if type(retv) is dict:
+            if "status" in retv.keys():
+                return int(retv["status"]), retv["data"]
+        return "-1", {}

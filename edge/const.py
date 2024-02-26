@@ -64,6 +64,16 @@ PAYLOAD_ID = """
 }
 """
 
+PAYLOAD_SID = """
+{
+    "body": {
+        "sid": $id,
+        "date":"$date"
+    },
+    "WAITING_PROMISE": true
+}
+"""
+
 PAYLOAD_DETAILS = """{
     "body":{
         "mi_id":$mi_id,
@@ -104,6 +114,8 @@ GET_DATA_API = "pvm-data/data_count_station_real_data"
 GET_ALL_DEVICE_API = "pvm/station_select_device_of_tree"
 STATION_FIND = "pvm/station_find"
 DATA_FIND_DETAILS = "pvm-data/data_find_details"
+DOWN_MODULE_DAY_DATA = "pvm-data/api/0/module/data/down_module_day_data"
+
 
 # For MQTT
 MQTT_PUB = "home/solar"
