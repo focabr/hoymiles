@@ -67,7 +67,7 @@ PAYLOAD_ID = """
 PAYLOAD_SID = """
 {
     "body": {
-        "sid": $id,
+        "sid": $sid,
         "date":"$date"
     },
     "WAITING_PROMISE": true
