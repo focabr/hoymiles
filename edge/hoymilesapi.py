@@ -22,6 +22,7 @@ from const import (
     GET_ALL_DEVICE_API,
     GET_DATA_API,
     HEADER_DATA,
+    HEADER_DATA_NEAPI,
     HEADER_LOGIN,
     HTTP_STATUS_CODE,
     LOCAL_TIMEZONE,
@@ -532,7 +533,7 @@ class Hoymiles(object):
         payload = template.substitute(
             sid=self.plant_id, date=datetime.now().strftime("%Y-%m-%d")
         )
-        header = HEADER_DATA
+        header = HEADER_DATA_NEAPI
         header["Cookie"] = (
             COOKIE_UID
             + "; hm_token="

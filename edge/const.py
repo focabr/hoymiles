@@ -102,6 +102,25 @@ HEADER_DATA = {
     "Cookie": "hm_token_language=en_us; ",
 }
 
+HEADER_DATA_NEAPI = {
+    "Content-Type": "application/json;charset=UTF-8",
+    "Cache-Control": "no-cache",
+    "Host": "neapi.hoymiles.com",
+    "Origin": "https://global.hoymiles.com",
+    "Referer": "https://global.hoymiles.com/",
+    "Connection": "keep-alive",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-site",
+    "authorization": "2.Om1QmwbrkLgicWyJzUFFIn0cNQgkROWvWaLpzGPSwW76nE3fTUtlgmxvEssSllDBrR3NMfg8qNKS7XIHnqh6ph.0",
+    "language": "en-us",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",  # pylint: disable=line-too-long
+    "Accept-Language": "pt-BR,pt;q=0.9,it-IT;q=0.8,it;q=0.7,es-ES;q=0.6,es;q=0.5,en-US;q=0.4,en;q=0.3",  # pylint: disable=line-too-long
+    "Cookie": "hm_token_language=en_us; ",
+}
+
 SECRETS = "secrets.ini"
 
 COOKIE_UID = "'uid=fff9c382-389f-4a47-8dc9-c5486fc3d9f5"
