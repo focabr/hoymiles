@@ -113,9 +113,7 @@ class MqttApi:
             if self.client_status:
                 self._client.loop_start()  # start the loop
 
-    def on_connect(
-        self, client, userdata, flags, ret_code
-    ):  # pylint: disable=unused-argument
+    def on_connect(self, client, userdata, flags, ret_code):  # pylint: disable=unused-argument
         """Mqtt on connect
 
         Args:
@@ -186,9 +184,7 @@ class MqttApi:
             if self.last_mid - 1 != mid:
                 self.logger.error(f"Error mid: {mid} no publiation.")
 
-    def on_disconnect(
-        self, client, userdata, ret_code
-    ):  # pylint: disable=unused-argument
+    def on_disconnect(self, client, userdata, ret_code):  # pylint: disable=unused-argument
         """Mqtt on disconnect
 
         Args:
