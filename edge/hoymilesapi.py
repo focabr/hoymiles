@@ -208,7 +208,8 @@ class Hoymiles(object):
         )
         sess = requests.Session()
         prepped = req.prepare()
-        self.logger.debug(prepped.headers)
+        self.logger.debug("header: %s", prepped.headers)
+        self.logger.debug("body: %s", prepped.body)
         try:
             response = sess.send(prepped)
             ret = ""
