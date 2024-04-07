@@ -1,11 +1,18 @@
 {
-    "files.associations": {
-        "*.yaml": "home-assistant"
-    },
-    "python.linting.pylintArgs": [
-        "--disable",
-        "broad-except,logging-fstring-interpolation,consider-using-dict-items"
-    ],
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
+  "files.associations": {
+    "*.yaml": "home-assistant"
+  },
+  "python.linting.pylintArgs": [
+    "--disable",
+    "broad-except,logging-fstring-interpolation,consider-using-dict-items"
+  ],
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "files.trimTrailingWhitespace": true,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  }
 }

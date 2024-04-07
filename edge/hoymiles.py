@@ -3,7 +3,7 @@ Main module of addon
 """
 
 __author__ = "dmslabs&Cosik"
-__version__ = "1.2.6.dev5"
+__version__ = "1.2.6.dev6"
 __app_name__ = "Hoymiles Gateway"
 
 import json
@@ -253,6 +253,7 @@ def publicate_data(hoymiles_h: Hoymiles, mqtt_h: MqttApi):
             logger.info(
                 f"{device.model_no}_{device.id} data publication...{datetime.now()}"
             )
+            logger.debug("mqtt public for %s: %s", str(device.id), json_ups)
             mqtt_h.send_clients_status()
 
     for device in hoymiles_h.micro_list:
@@ -263,6 +264,7 @@ def publicate_data(hoymiles_h: Hoymiles, mqtt_h: MqttApi):
             logger.info(
                 f"{device.init_hard_no}_{device.id} data publication...{datetime.now()}"
             )
+            logger.debug("mqtt public for %s: %s", str(device.id), json_ups)
             mqtt_h.send_clients_status()
 
     return
