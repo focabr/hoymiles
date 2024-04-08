@@ -159,6 +159,8 @@ class MqttApi:
     def public(self, topic, payload):
         "Publica no MQTT atual"
         ret_code, mid = self._client.publish(topic, payload)
+        self.logger.debug("mqtt public topic: %s", topic)
+        self.logger.debug("mqtt public payload: %s", payload)
         self.last_mid = mid
         if ret_code == mqtt.MQTT_ERR_NO_CONN:
             self.logger.debug("mqtt.MQTT_ERR_NO_CONN")
