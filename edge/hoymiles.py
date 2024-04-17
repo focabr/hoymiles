@@ -3,7 +3,7 @@ Main module of addon
 """
 
 __author__ = "dmslabs&Cosik"
-__version__ = "1.2.8.dev6"
+__version__ = "1.2.8.dev10"
 __app_name__ = "Hoymiles Gateway"
 
 import json
@@ -237,7 +237,7 @@ def publicate_data(hoymiles_h: Hoymiles, mqtt_h: MqttApi):
     hoymiles_h.update_devices_status()
     hoymiles_h.get_solar_data()
     hoymiles_h.get_alarms()
-    hoymiles_h.down_module_day_data()
+    # hoymiles_h.down_module_day_data()
     if len(hoymiles_h.solar_data):
         json_ups = json.dumps(hoymiles_h.solar_data)
         mqtt_h.public(MQTT_PUB + "/json" + "_" + str(hoymiles_h.plant_id), json_ups)
