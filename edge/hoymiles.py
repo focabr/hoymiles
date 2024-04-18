@@ -236,11 +236,7 @@ def publicate_data(hoymiles_h: Hoymiles, mqtt_h: MqttApi):
     # publica dados no MQTT  - MQTT_PUB/json
     hoymiles_h.update_devices_status()
     hoymiles_h.get_solar_data()
-    for device in hoymiles_h.micro_list:
-        logger.debug("Antes device Micro: %s", json.dumps(device.data))
     hoymiles_h.get_alarms()
-    for device in hoymiles_h.micro_list:
-        logger.debug("Depois device Micro: %s", json.dumps(device.data))
     # hoymiles_h.down_module_day_data()
     if len(hoymiles_h.solar_data):
         json_ups = json.dumps(hoymiles_h.solar_data)
@@ -388,13 +384,7 @@ def main() -> int:
             for dtu in plant_list[id].dtu_list:
                 dtu_status_list.append(dtu.data["connect"])
 
-        for device in plant_list[id].micro_list:
-            logger.debug("Antes plant_list Micro: %s", json.dumps(device.data))
-
         plant_list[id].get_alarms()
-
-        for device in plant_list[id].micro_list:
-            logger.debug("Depois plant_list Micro: %s", json.dumps(device.data))
 
         send_hass(plant_list[id], mqtt_h)
 
