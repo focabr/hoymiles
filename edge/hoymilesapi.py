@@ -503,7 +503,7 @@ class Hoymiles(object):
                     )
 
                     micro.data["alarm_string"] += str(
-                        retv["data"]["warn_list"][0]["wd2"], encoding="UTF-8"
+                        retv["data"]["warn_list"][0]["wd2"]
                     )
                 else:
                     micro.data["alarm_code"] = 0
