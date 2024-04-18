@@ -507,7 +507,11 @@ class Hoymiles(object):
                     micro.data["alarm_code"] = 0
                     micro.data["alarm_string"] = ""
             except Exception as err:
-                self.logger.warning(f"{err}")
+                self.logger.warning(f"Oxi try: {err}")
+                self.logger.warning("Dump data micro")
+                self.logger.warning(f"{micro}")
+                self.logger.warning("Dump data for micro_list")
+                self.logger.warning(f"{self.micro_list}")
 
     def get_alarm_description(self, code: int) -> str:
         """Getting alarm description based on id
