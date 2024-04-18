@@ -494,24 +494,24 @@ class Hoymiles(object):
                     micro.data["alarm_string"] = self.get_alarm_description(
                         micro.data["alarm_code"]
                     )
-                    micro.data["alarm_string"] += str(
+                    micro.data["alarm_string"] += " " + str(
                         retv["data"]["warn_list"][0]["wd1"]
                     )
 
-                    micro.data["alarm_string"] += str(
-                        retv["data"]["warn_list"][0]["wdd2"], encoding="UTF-8"
+                    micro.data["alarm_string"] += " " + str(
+                        retv["data"]["warn_list"][0]["wdd2"]
                     )
 
-                    micro.data["alarm_string"] += retv["data"]["warn_list"][0]["wd2"]
+                    micro.data["alarm_string"] += str(
+                        retv["data"]["warn_list"][0]["wd2"], encoding="UTF-8"
+                    )
                 else:
                     micro.data["alarm_code"] = 0
                     micro.data["alarm_string"] = ""
             except Exception as err:
                 self.logger.warning(f"Oxi try: {err}")
-                self.logger.warning("Dump data micro")
-                print(f"{micro}")
-                self.logger.warning("Dump data for micro_list")
-                print(f"{self.micro_list}")
+                self.logger.warning("Micro: %s", micro)
+                self.logger.warning("Dump data for micro_list: %s", self.micro_list)
 
     def get_alarm_description(self, code: int) -> str:
         """Getting alarm description based on id

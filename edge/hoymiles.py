@@ -236,7 +236,9 @@ def publicate_data(hoymiles_h: Hoymiles, mqtt_h: MqttApi):
     # publica dados no MQTT  - MQTT_PUB/json
     hoymiles_h.update_devices_status()
     hoymiles_h.get_solar_data()
+    logger.debug("Micro_list: %s", hoymiles_h.micro_list)
     hoymiles_h.get_alarms()
+    logger.debug("Micro_list: %s", hoymiles_h.micro_list)
     # hoymiles_h.down_module_day_data()
     if len(hoymiles_h.solar_data):
         json_ups = json.dumps(hoymiles_h.solar_data)
