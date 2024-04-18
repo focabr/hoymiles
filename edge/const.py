@@ -96,7 +96,7 @@ HEADER_DATA = {
     "Host": "global.hoymiles.com",
     "Connection": "keep-alive",
     "Accept": "application/json, text/plain, */*",
-    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",  # pylint: disable=line-too-long
     "Accept-Language": "pt-BR,pt;q=0.9,it-IT;q=0.8,it;q=0.7,es-ES;q=0.6,es;q=0.5,en-US;q=0.4,en;q=0.3",  # pylint: disable=line-too-long
     "Cookie": "hm_token_language=en_us; ",
@@ -153,7 +153,7 @@ LOCAL_TIMEZONE = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinf
 
 json_hass = {
     "sensor": """
-{ 
+{
   "stat_t": "home/$sid/json_$via_device",
   "name": "$name",
   "uniq_id": "$uniq_id",
@@ -166,7 +166,7 @@ json_hass = {
   "device": { $device_dict }
 }""",
     "binary_sensor": """
-{ 
+{
   "stat_t": "home/$sid/json_$via_device",
   "name": "$name",
   "uniq_id": "$uniq_id",

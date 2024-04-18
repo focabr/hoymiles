@@ -494,15 +494,11 @@ class Hoymiles(object):
                     micro.data["alarm_string"] = self.get_alarm_description(
                         micro.data["alarm_code"]
                     )
-                    micro.data["alarm_string"] += str(
-                        retv["data"]["warn_list"][0]["wd1"], encoding="utf-8"
-                    )
-                    micro.data["alarm_string"] += str(
-                        retv["data"]["warn_list"][0]["wdd2"], encoding="utf-8"
-                    )
-                    micro.data["alarm_string"] += str(
-                        retv["data"]["warn_list"][0]["wd2"], encoding="utf-8"
-                    )
+                    micro.data["alarm_string"] += retv["data"]["warn_list"][0]["wd1"]
+
+                    micro.data["alarm_string"] += retv["data"]["warn_list"][0]["wdd2"]
+
+                    micro.data["alarm_string"] += retv["data"]["warn_list"][0]["wd2"]
                 else:
                     micro.data["alarm_code"] = 0
                     micro.data["alarm_string"] = ""
