@@ -477,7 +477,7 @@ class Hoymiles(object):
             + f"Expires=Sat, 30 Mar {date.today().year + 1} 22:11:48 GMT;"
             + "'"
         )
-        for micro in self.micro_list:
+        for i, micro in enumerate(self.micro_list):
             template = Template(PAYLOAD_DETAILS)
             payload = template.substitute(
                 mi_id=micro.id,
@@ -487,29 +487,29 @@ class Hoymiles(object):
             )
             retv = self.send_payload(DATA_FIND_DETAILS, header, payload)
             try:
-                for device in self.micro_list:
+                for x, device in enumerate(self.micro_list):
                     self.logger.debug(
-                        "device for micro_list: %s", json.dumps(device.data)
+                        "device for micro_list: %s", json.dumps(device[x].data)
                     )
                 if retv["data"]["warn_list"]:
-                    micro.data["alarm_code"] = int(
+                    micro[i].data["alarm_code"] = int(
                         retv["data"]["warn_list"][0]["err_code"]
                     )
-                    micro.data["alarm_string"] = self.get_alarm_description(
+                    micro[i].data["alarm_string"] = self.get_alarm_description(
                         micro.data["alarm_code"]
                     )
-                    micro.data["alarm_string"] += " " + str(
+                    micro[i].data["alarm_string"] += " " + str(
                         retv["data"]["warn_list"][0]["wd1"]
                     )
-                    micro.data["alarm_string"] += " " + str(
+                    micro[i].data["alarm_string"] += " " + str(
                         retv["data"]["warn_list"][0]["wdd2"]
                     )
-                    micro.data["alarm_string"] += " " + str(
+                    micro[i].data["alarm_string"] += " " + str(
                         retv["data"]["warn_list"][0]["wd2"]
                     )
                 else:
-                    micro.data["alarm_code"] = 0
-                    micro.data["alarm_string"] = ""
+                    micro[i].data["alarm_code"] = 0
+                    micro[i].data["alarm_string"] = ""
             except Exception as err:
                 self.logger.warning(f"{err}")
 
