@@ -487,7 +487,7 @@ class Hoymiles(object):
             )
             retv = self.send_payload(DATA_FIND_DETAILS, header, payload)
             try:
-                self.logger.debug("device for micro_list: %s", json.dumps(micro.data))
+                self.logger.debug("micro data: %s", json.dumps(micro.data))
                 for device in self.micro_list:
                     self.logger.debug(
                         "device for micro_list: %s",
@@ -513,6 +513,12 @@ class Hoymiles(object):
                 else:
                     micro.data.update({"alarm_code": 0})
                     micro.data.update({"alarm_string": ""})
+                self.logger.debug("after micro data: %s", json.dumps(micro.data))
+                for device in self.micro_list:
+                    self.logger.debug(
+                        "after device for micro_list: %s",
+                        json.dumps(device.data),
+                    )
             except Exception as err:
                 self.logger.warning(f"{err}")
 
