@@ -93,7 +93,8 @@ class Micros(PlantObject):
     def __init__(self, micro_data: dict) -> None:
         super(Micros, self).__init__(micro_data)
         self.init_hard_no = micro_data["model_no"]
-        self.connect = micro_data["connect"]
+        if micro_data["connect"]:
+            self.connect = micro_data["connect"]
         if micro_data["alarm_code"]:
             self.alarm_code = micro_data["alarm_code"]
         if micro_data["alarm_string"]:
