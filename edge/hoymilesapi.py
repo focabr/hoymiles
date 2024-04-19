@@ -93,6 +93,9 @@ class Micros(PlantObject):
     def __init__(self, micro_data: dict) -> None:
         super(Micros, self).__init__(micro_data)
         self.init_hard_no = micro_data["model_no"]
+        self.alarm_code = micro_data["alarm_code"]
+        self.alarm_string = micro_data["alarm_string"]
+        self.connect = micro_data["connect"]
 
 
 class Hoymiles(object):
@@ -487,6 +490,10 @@ class Hoymiles(object):
             )
             retv = self.send_payload(DATA_FIND_DETAILS, header, payload)
             try:
+                self.logger.debug("micro alarm_code: %s", json.dumps(micro.alarm_code))
+                self.logger.debug(
+                    "micro alarm_string: %s", json.dumps(micro.alarm_string)
+                )
                 self.logger.debug("micro data: %s", json.dumps(micro.data))
                 for device in self.micro_list:
                     self.logger.debug(
