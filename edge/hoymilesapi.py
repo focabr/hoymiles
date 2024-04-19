@@ -487,31 +487,31 @@ class Hoymiles(object):
             )
             retv = self.send_payload(DATA_FIND_DETAILS, header, payload)
             try:
-                self.logger.debug("device for micro_list: %s", json.dumps(micro.data))
+                self.logger.debug("device for micro_list: %s", json.dumps(micro))
                 for device in self.micro_list:
                     self.logger.debug(
                         "device for micro_list: %s",
                         json.dumps(device.data),
                     )
                 if retv["data"]["warn_list"]:
-                    micro.data["alarm_code"][i] = int(
+                    micro.data["alarm_code"] = int(
                         retv["data"]["warn_list"][0]["err_code"]
                     )
-                    micro.data["alarm_string"][i] = self.get_alarm_description(
+                    micro.data["alarm_string"] = self.get_alarm_description(
                         micro.data["alarm_code"]
                     )
-                    micro.data["alarm_string"][i] += " " + str(
+                    micro.data["alarm_string"] += " " + str(
                         retv["data"]["warn_list"][0]["wd1"]
                     )
-                    micro.data["alarm_string"][i] += " " + str(
+                    micro.data["alarm_string"] += " " + str(
                         retv["data"]["warn_list"][0]["wdd2"]
                     )
-                    micro.data["alarm_string"][i] += " " + str(
+                    micro.data["alarm_string"] += " " + str(
                         retv["data"]["warn_list"][0]["wd2"]
                     )
                 else:
-                    micro.data["alarm_code"][i] = 0
-                    micro.data["alarm_string"][i] = ""
+                    micro.data["alarm_code"] = 0
+                    micro.data["alarm_string"] = ""
             except Exception as err:
                 self.logger.warning(f"{err}")
 
