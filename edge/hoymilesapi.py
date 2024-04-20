@@ -93,12 +93,6 @@ class Micros(PlantObject):
     def __init__(self, micro_data: dict) -> None:
         super(Micros, self).__init__(micro_data)
         self.init_hard_no = micro_data["model_no"]
-        if "connect" in micro_data.keys():
-            self.connect = micro_data["connect"]
-        if "alarm_code" in micro_data.keys():
-            self.alarm_code = micro_data["alarm_code"]
-        if "alarm_string" in micro_data.keys():
-            self.alarm_string = micro_data["alarm_string"]
 
 
 class Hoymiles(object):
@@ -358,7 +352,8 @@ class Hoymiles(object):
 
                 if "children" in hw_data.keys():
                     for micro in hw_data["children"]:
-                        self.micro_list.append(Micros(micro))
+                        micro_data = micro
+                        self.micro_list.append(Micros(micro_data))
 
     def update_devices_status(self):
         """Update status of all plant devices"""
@@ -483,34 +478,32 @@ class Hoymiles(object):
             + f"Expires=Sat, 30 Mar {date.today().year + 1} 22:11:48 GMT;"
             + "'"
         )
-        for micro in self.micro_list:
+        for micro_alarm in self.micro_list:
             template = Template(PAYLOAD_DETAILS)
             payload = template.substitute(
-                mi_id=micro.id,
-                mi_sn=micro.sn,
+                mi_id=micro_alarm.id,
+                mi_sn=micro_alarm.sn,
                 sid=self.plant_id,
                 time=datetime.now().strftime("%Y-%m-%d %H:%M"),
             )
             retv = self.send_payload(DATA_FIND_DETAILS, header, payload)
             try:
-                self.logger.debug("micro alarm_code: %s", json.dumps(micro.alarm_code))
-                self.logger.debug(
-                    "micro alarm_string: %s", json.dumps(micro.alarm_string)
-                )
-                self.logger.debug("micro data: %s", json.dumps(micro.data))
+                self.logger.debug("micro id: %s", json.dumps(micro_alarm.id))
+                self.logger.debug("micro sn: %s", json.dumps(micro_alarm.sn))
+                self.logger.debug("micro data: %s", json.dumps(micro_alarm.data))
                 for device in self.micro_list:
                     self.logger.debug(
                         "device for micro_list: %s",
                         json.dumps(device.data),
                     )
                 if retv["data"]["warn_list"]:
-                    micro.data.update(
+                    micro_alarm.data.update(
                         {"alarm_code": int(retv["data"]["warn_list"][0]["err_code"])}
                     )
-                    micro.data.update(
+                    micro_alarm.data.update(
                         {
                             "alarm_string": self.get_alarm_description(
-                                micro.data["alarm_code"]
+                                micro_alarm.data["alarm_code"]
                             )
                             + " "
                             + retv["data"]["warn_list"][0]["wd1"]
@@ -521,9 +514,9 @@ class Hoymiles(object):
                         }
                     )
                 else:
-                    micro.data.update({"alarm_code": 0})
-                    micro.data.update({"alarm_string": ""})
-                self.logger.debug("after micro data: %s", json.dumps(micro.data))
+                    micro_alarm.data.update({"alarm_code": 0})
+                    micro_alarm.data.update({"alarm_string": ""})
+                self.logger.debug("after micro data: %s", json.dumps(micro_alarm.data))
                 for device in self.micro_list:
                     self.logger.debug(
                         "after device for micro_list: %s",
