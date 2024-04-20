@@ -88,7 +88,7 @@ class Dtu(PlantObject):
 class Micros(PlantObject):
     """Class representig Microinverter device"""
 
-    data = {"connect": "", "alarm_code": 0, "alarm_string": ""}
+    #    data = {"connect": "", "alarm_code": 0, "alarm_string": ""}
 
     def __init__(self, micro_data: dict) -> None:
         super(Micros, self).__init__(micro_data)
