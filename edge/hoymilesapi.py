@@ -88,7 +88,7 @@ class Dtu(PlantObject):
 class Micros(PlantObject):
     """Class representig Microinverter device"""
 
-    data = {"connect": "", "alarm_code": 0, "alarm_string": ""}
+    # data = {"connect": "", "alarm_code": 0, "alarm_string": ""}
 
     def __init__(self, micro_data: dict) -> None:
         super(Micros, self).__init__(micro_data)
@@ -506,7 +506,7 @@ class Hoymiles(object):
                     )
                     micro_alarm.data.update(
                         {
-                            "alarm_string"
+                            "alarm_string_"
                             + str(micro_alarm.id): self.get_alarm_description(
                                 micro_alarm.data["alarm_code"]
                             )
@@ -519,8 +519,8 @@ class Hoymiles(object):
                         }
                     )
                 else:
-                    micro_alarm.data.update({"alarm_code": 0})
-                    micro_alarm.data.update({"alarm_string": ""})
+                    micro_alarm.data.update({"alarm_code_" + str(micro_alarm.id): 0})
+                    micro_alarm.data.update({"alarm_string_" + str(micro_alarm.id): ""})
                 self.logger.debug("after micro data: %s", json.dumps(micro_alarm.data))
                 for device in self.micro_list:
                     self.logger.debug(
