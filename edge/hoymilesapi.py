@@ -500,16 +500,11 @@ class Hoymiles(object):
                     )
                 if retv["data"]["warn_list"]:
                     micro_alarm.data.update(
-                        {
-                            "alarm_code_" + str(micro_alarm.id): int(
-                                retv["data"]["warn_list"][0]["err_code"]
-                            )
-                        }
+                        {"alarm_code": int(retv["data"]["warn_list"][0]["err_code"])}
                     )
                     micro_alarm.data.update(
                         {
-                            "alarm_string_"
-                            + str(micro_alarm.id): self.get_alarm_description(
+                            "alarm_string": self.get_alarm_description(
                                 micro_alarm.data["alarm_code"]
                             )
                             + " "
