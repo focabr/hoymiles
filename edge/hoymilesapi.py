@@ -496,7 +496,7 @@ class Hoymiles(object):
                 self.logger.debug("micro data: %s", json.dumps(micro_alarm.data))
                 for device in self.micro_list:
                     self.logger.debug(
-                        "device for micro_list: %s",
+                        "before device for micro_list: %s",
                         json.dumps(device.data),
                     )
                 if retv["data"]["warn_list"]:
@@ -517,9 +517,11 @@ class Hoymiles(object):
                         }
                     )
                 else:
-                    micro_alarm.data.update({"alarm_code": 0})
-                    micro_alarm.data.update({"alarm_string": str(micro_alarm.sn)})
-                self.logger.debug("after micro data: %s", json.dumps(micro_alarm.data))
+                    micro_alarm.alarm_code = 0
+                    micro_alarm.alarm_string = str(micro_alarm.sn)
+                self.logger.debug(
+                    "updated micro data: %s", json.dumps(micro_alarm.data)
+                )
                 for device in self.micro_list:
                     self.logger.debug(
                         "after device for micro_list: %s",
