@@ -93,8 +93,9 @@ class Micros(PlantObject):
     def __init__(self, micro_data: dict) -> None:
         super(Micros, self).__init__(micro_data)
         self.init_hard_no = micro_data["model_no"]
-        for key, value in micro_data.items():
-            setattr(self, key, value)
+        self.connect = ""
+        self.alarm_code = 0
+        self.alarm_string = ""
 
 
 class Hoymiles(object):
@@ -516,8 +517,8 @@ class Hoymiles(object):
                         }
                     )
                 else:
-                    micro_alarm.data.update({"alarm_code_" + str(micro_alarm.id): 0})
-                    micro_alarm.data.update({"alarm_string_" + str(micro_alarm.id): ""})
+                    micro_alarm.data.update({"alarm_code": 0})
+                    micro_alarm.data.update({"alarm_string": str(micro_alarm.sn)})
                 self.logger.debug("after micro data: %s", json.dumps(micro_alarm.data))
                 for device in self.micro_list:
                     self.logger.debug(
