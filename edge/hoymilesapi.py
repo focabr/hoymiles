@@ -75,6 +75,9 @@ class PlantObject:
         self.uuid = str(uuid.uuid1())
         self.err_code = 0
         self.err_msg = ""
+        self.connect = ""
+        self.alarm_code = 0
+        self.alarm_string = ""
 
 
 class Dtu(PlantObject):
@@ -93,9 +96,6 @@ class Micros(PlantObject):
     def __init__(self, micro_data: dict) -> None:
         super(Micros, self).__init__(micro_data)
         self.init_hard_no = micro_data["model_no"]
-        self.connect = ""
-        self.alarm_code = 0
-        self.alarm_string = ""
 
 
 class Hoymiles(object):
