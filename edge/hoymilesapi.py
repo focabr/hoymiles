@@ -493,7 +493,7 @@ class Hoymiles(object):
             try:
                 self.logger.debug("micro id: %s", json.dumps(micro_alarm.id))
                 self.logger.debug("micro sn: %s", json.dumps(micro_alarm.sn))
-                self.logger.debug("micro data: %s", json.dumps(micro_alarm[i].data))
+                self.logger.debug("micro data: %s", json.dumps(micro_alarm.data))
                 for device in self.micro_list:
                     self.logger.debug(
                         "before device for micro_list: %s",
