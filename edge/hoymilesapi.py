@@ -517,8 +517,8 @@ class Hoymiles(object):
                         }
                     )
                 else:
-                    micro_alarm.data["alarm_code"] = 0
-                    micro_alarm[i].data["alarm_string"] = str(micro_alarm.sn)
+                    micro_alarm.data["alarm_code"] += 1
+                    micro_alarm.alarm_string = str(micro_alarm.sn)
                 self.logger.debug(
                     "updated micro data: %s", json.dumps(micro_alarm.data)
                 )
