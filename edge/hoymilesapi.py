@@ -481,7 +481,7 @@ class Hoymiles(object):
             + f"Expires=Sat, 30 Mar {date.today().year + 1} 22:11:48 GMT;"
             + "'"
         )
-        for micro_alarm in self.micro_list:
+        for i, micro_alarm in enumerate(self.micro_list):
             template = Template(PAYLOAD_DETAILS)
             payload = template.substitute(
                 mi_id=micro_alarm.id,
@@ -493,7 +493,7 @@ class Hoymiles(object):
             try:
                 self.logger.debug("micro id: %s", json.dumps(micro_alarm.id))
                 self.logger.debug("micro sn: %s", json.dumps(micro_alarm.sn))
-                self.logger.debug("micro data: %s", json.dumps(micro_alarm.data))
+                self.logger.debug("micro data: %s", json.dumps(micro_alarm.data[i]))
                 for device in self.micro_list:
                     self.logger.debug(
                         "before device for micro_list: %s",
@@ -517,8 +517,8 @@ class Hoymiles(object):
                         }
                     )
                 else:
-                    micro_alarm.alarm_code = 0
-                    micro_alarm.alarm_string = str(micro_alarm.sn)
+                    micro_alarm.data["alarm_code"] = 0
+                    micro_alarm.data["alarm_string"] = str(micro_alarm.sn)
                 self.logger.debug(
                     "updated micro data: %s", json.dumps(micro_alarm.data)
                 )
